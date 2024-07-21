@@ -13,7 +13,7 @@
     $posts = Post::getPosts();
 
     foreach($posts as $post) {
-        echo "<div>{$post->getFileName()}</div>";
+        echo "<div><a href = '{$post->getUrl()}'>{$post->getFileName()} </a></div>";
     }
     ?>
 </body>

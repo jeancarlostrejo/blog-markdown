@@ -37,4 +37,12 @@ class Post
 
         return $posts;
     }
+
+    public function getUrl(): string
+    {
+        $url = substr($this->file, 0, strpos($this->file, ".md"));
+        $title = str_replace(" ", "-", $url);
+
+        return "http://localhost/blog-md/?post={$title}";
+    }
 }
