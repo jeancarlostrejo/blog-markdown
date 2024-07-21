@@ -10,9 +10,11 @@
     <?php
     use Ferre\Blog\models\Post;
 
-    $post = new Post("test.md");
+    $posts = Post::getPosts();
 
-    $post->getContent();
+    foreach($posts as $post) {
+        echo "<div>{$post->getFileName()}</div>";
+    }
     ?>
 </body>
 </html>

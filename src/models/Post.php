@@ -22,4 +22,19 @@ class Post
         $fileName = "{$dir}/entries/{$this->file}";
         return $fileName;
     }
+
+    public static function getPosts(): array
+    {
+        $posts = [];
+        $files = scandir(Url::getRootPath() . "/entries");
+
+        foreach ($files as $file) {
+            if (strpos($file, ".md") > 0) {
+                $posts[] = new Post($file);
+            }
+
+        }
+
+        return $posts;
+    }
 }
