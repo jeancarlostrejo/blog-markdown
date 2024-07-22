@@ -1,7 +1,7 @@
 <nav>
     <ul>
         <li>
-            <a href="#">Home</a>
+            <a href="?view=home">Home</a>
         </li>
     </ul>
 </nav>
