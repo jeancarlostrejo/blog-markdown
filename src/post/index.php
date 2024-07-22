@@ -1,3 +1,11 @@
+<?php
+
+use Ferre\Blog\models\Post;
+
+$post = new Post($postName . ".md");
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,13 +16,7 @@
 <body>
     <h1>Mi primer Post</h1>
     <?php
-    use Ferre\Blog\models\Post;
-
-    $posts = Post::getPosts();
-
-    foreach($posts as $post) {
-        echo "<div><a href = '{$post->getUrl()}'>{$post->getFileName()} </a></div>";
-    }
+        echo $post->getContent();   
     ?>
 </body>
 </html>

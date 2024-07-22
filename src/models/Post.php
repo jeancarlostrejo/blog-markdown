@@ -2,18 +2,31 @@
 
 namespace Ferre\Blog\models;
 
+use Error;
+
 class Post
 {
     public function __construct(private string $file)
     {
     }
 
-    public function getContent(): void
+    public function getContent(): string
     {
-        $stream = fopen($this->getFileName(), "r");
-        $content = fread($stream, filesize($this->getFileName()));
+        if (file_exists($this->getFileName())) {
+            $stream = fopen($this->getFileName(), "r");
+            $content = fread($stream, filesize($this->getFileName()));
+            return nl2br($content);
+        } else {
+            $this->getFileNameWithoutDash();
 
-        echo $content;
+            if (file_exists($this->getFileName())) {
+                $stream = fopen($this->getFileName(), "r");
+                $content = fread($stream, filesize($this->getFileName()));
+                return nl2br($content);
+            }
+        }
+
+        throw new Error("No existe");
     }
 
     public function getFileName(): string
@@ -44,5 +57,22 @@ class Post
         $title = str_replace(" ", "-", $url);
 
         return "http://localhost/blog-md/?post={$title}";
+    }
+
+    private function getFileNameWithoutDash()
+    {
+        $title = str_replace("-", " ", $this->file);
+        $this->file = $title;
+
+        return $title;
+    }
+
+    public function getPostName(): string
+    {
+        $title = $this->file;
+        $title = str_replace("-", " ", $this->file);
+        $title = str_replace(".md", "", $this->file);
+
+        return $title;
     }
 }

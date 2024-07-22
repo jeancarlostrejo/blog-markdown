@@ -11,5 +11,7 @@
             "email": "jeancarlostrejo19@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "league/commonmark": "^2.4"
+    }
 }
