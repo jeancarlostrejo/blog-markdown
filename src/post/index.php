@@ -14,7 +14,6 @@ $post = new Post($postName . ".md");
     <title>Post</title>
 </head>
 <body>
-    <h1>Mi primer Post</h1>
     <?php
         echo $post->getContent();   
     ?>

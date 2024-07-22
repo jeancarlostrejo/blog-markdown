@@ -3,6 +3,7 @@
 namespace Ferre\Blog\models;
 
 use Error;
+use League\CommonMark\CommonMarkConverter;
 
 class Post
 {
@@ -12,17 +13,19 @@ class Post
 
     public function getContent(): string
     {
+        $converter = new CommonMarkConverter();
+
         if (file_exists($this->getFileName())) {
             $stream = fopen($this->getFileName(), "r");
             $content = fread($stream, filesize($this->getFileName()));
-            return nl2br($content);
+            return $converter->convert($content);
         } else {
             $this->getFileNameWithoutDash();
 
             if (file_exists($this->getFileName())) {
                 $stream = fopen($this->getFileName(), "r");
                 $content = fread($stream, filesize($this->getFileName()));
-                return nl2br($content);
+                return $converter->convert($content);
             }
         }
 
